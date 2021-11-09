@@ -61,10 +61,10 @@ function listarProductos(productos) {
   for (nfila = 0; nfila < num; nfila++) {
     ids[nfila].innerHTML = productos[nfila].id;
     titles[nfila].innerHTML = productos[nfila].title;
-    action[nfila].innerHTML = "<button>Eliminar</button>";
+    action[nfila].innerHTML = "<input type='submit' value ='Eliminar'/>";
     action[nfila].firstChild.setAttribute(
       "onclick",
-      "javascript:deleteProduct(" + productos[nfila].id + ")"
+      "deleteProduct(" + productos[nfila].id + ")"
     );
     descriptions[nfila].innerHTML = productos[nfila].description;
     categories[nfila].innerHTML = productos[nfila].category;
@@ -80,8 +80,8 @@ function listarProductos(productos) {
   }
 }
 
-function obtenerProductos() {
-  fetch(url)
+async function obtenerProductos() {
+  await fetch(url)
     .then((res) => res.json())
     .then((data) => {
       productos = data;
@@ -107,7 +107,7 @@ function ordenarAsc(p_array_json, p_key) {
     return 0;
   });
 }
-function addProduct() {
+async function addProduct() {
   var product = null;
   let foto = document.getElementsByName("foto")[0].value;
   let precio = document.getElementsByName("precio")[0].value;
@@ -127,7 +127,7 @@ function addProduct() {
       category: seleccion,
       description: description,
     };
-    fetch(url, {
+    await fetch(url, {
       method: "POST",
       body: JSON.stringify(product),
       headers: {
@@ -140,9 +140,11 @@ function addProduct() {
   }
 }
 function deleteProduct(id) {
-  fetch(url + "/" + id, {
-    method: "DELETE",
-  })
-    .then((response) => response.json)
-    .then(() => obtenerProductos()); //.catch((e) => console.log(e));
+  Promise.allSettled([
+    Promise.resolve(
+      fetch(url + "/" + id, {
+        method: "DELETE",
+      }).then((response) => response.json)
+    ),
+  ]).then(() => obtenerProductos()); //.catch((e) => console.log(e));
 }
