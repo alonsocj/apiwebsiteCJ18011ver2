@@ -1,6 +1,6 @@
-const url = "https://retoolapi.dev/BjJaBV/productos";
+const url = "https://retoolapi.dev/WxKzb1/productos";
 var fila =
-  "<tr><td class='id'></td><td class='foto'></td><td class='price'></td><td class='title'></td><td class='description'></td><td class='category'></td><td class='action'></td></td></tr>";
+  "<tr><td class='id'></td><td class='foto'></td><td class='price'></td><td class='title'></td><td class='description'></td><td class='category'></td><td class='action'></td></tr>";
 var productos = null;
 function codigoCat(catstr) {
   var code = "null";
@@ -16,9 +16,6 @@ function codigoCat(catstr) {
       break;
     case "damas":
       code = "c4";
-      break;
-    case "ropa":
-      code = "c5";
       break;
   }
   return code;
@@ -61,11 +58,7 @@ function listarProductos(productos) {
   for (nfila = 0; nfila < num; nfila++) {
     ids[nfila].innerHTML = productos[nfila].id;
     titles[nfila].innerHTML = productos[nfila].title;
-    action[nfila].innerHTML = "<input type='submit' value ='Eliminar'/>";
-    action[nfila].firstChild.setAttribute(
-      "onclick",
-      "deleteProduct(" + productos[nfila].id + ")"
-    );
+    action[nfila].innerHTML = "<button>Eliminar</button>";
     descriptions[nfila].innerHTML = productos[nfila].description;
     categories[nfila].innerHTML = productos[nfila].category;
     catcode = codigoCat(productos[nfila].category);
@@ -78,8 +71,15 @@ function listarProductos(productos) {
       "window.open('" + productos[nfila].image + "');"
     );
   }
+  document.addEventListener("DOMContentLoaded", function () {
+    for (nfila = 0; nfila < num; nfila++) {
+      action[nfila].firstChild.setAttribute(
+        "onclick",
+        "deleteProduct(" + productos[nfila].id + ");"
+      );
+    }
+  });
 }
-
 async function obtenerProductos() {
   await fetch(url)
     .then((res) => res.json())
@@ -139,12 +139,20 @@ async function addProduct() {
       .then(() => obtenerProductos());
   }
 }
-function deleteProduct(id) {
-  Promise.allSettled([
-    Promise.resolve(
-      fetch(url + "/" + id, {
-        method: "DELETE",
-      }).then((response) => response.json)
-    ),
-  ]).then(() => obtenerProductos()); //.catch((e) => console.log(e));
+async function deleteProduct(id) {
+  await fetch(url + "/" + id, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      console.log("works");
+      response.json;
+    })
+    .then(() => {
+      obtenerProductos();
+      alert("Se ha borrado exitosamente el producto ");
+    })
+    .catch((e) => {
+      console.log("Error");
+      console.log(e);
+    });
 }

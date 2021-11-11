@@ -15,23 +15,22 @@
       <form method="post" action="javascript:addProduct()">
         <label>Foto del Producto</label>
         <input type="text" name="foto" />
-		<label>Precio del Producto</label>
+        <label>Precio del Producto</label>
         <input type="text" name="precio" />
-		<label>Titulo del Producto</label>
+        <label>Titulo del Producto</label>
         <input type="text" name="titulo" />
-		<label>Descripcion del Producto</label>
+        <label>Descripcion del Producto</label>
         <input type="text" name="description" />
-		<select name="categorias" required>
-			<option value="null">--Seleccione una Categoria--</option>
-			<option value="caballeros">caballeros</option>
-			<option value="electronicos">electronicos</option>
-			<option value="joyeria">joyeria</option>
-			<option value="damas">damas</option>
-			<option value="ropa">ropa</option>
-		</select>
+        <select name="categorias" required>
+          <option value="null">--Seleccione una Categoria--</option>
+          <option value="caballeros">caballeros</option>
+          <option value="electronicos">electronicos</option>
+          <option value="joyeria">joyeria</option>
+          <option value="damas">damas</option>
+          <option value="ropa">ropa</option>
+        </select>
 
-
-        <button type="submit" >Agregar</button>
+        <button type="submit">Agregar</button>
       </form>
     </div>
     <p>
@@ -46,7 +45,6 @@
         <input type="checkbox" id="c2" value="c2" checked />Joyería
         <input type="checkbox" id="c3" value="c3" checked />Ropa Caballero
         <input type="checkbox" id="c4" value="c4" checked />Ropa Dama
-        <input type="checkbox" id="c5" value="c5" checked />Ropa Unisex
         <ol>
           <li>Click en la imagen para Acercamiento</li>
           <li>Click en precio para ordenar Asc o Desc</li>
@@ -60,7 +58,7 @@
               <th>Title</th>
               <th>Description</th>
               <th>Category</th>
-			  <th>Action</th>
+              <th>Accion</th>
             </tr>
           </thead>
           <tbody id="tbody"></tbody>
