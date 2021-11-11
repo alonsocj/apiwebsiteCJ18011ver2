@@ -42,7 +42,6 @@ input#c4:not(checked) ~ table tbody tr.c4 {
   display: none;
 }
 .addprod {
-  background-color: #3b4252;
   padding: 2.5rem;
   margin: 0 30rem;
   text-align: center;
