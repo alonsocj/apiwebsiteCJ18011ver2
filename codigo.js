@@ -53,12 +53,16 @@ function listarProductos(productos) {
     precio.innerHTML = "Precio D";
     precio.style.color = "#bf616a";
   }
-
+  var prueba;
   listado.style.display = "block";
   for (nfila = 0; nfila < num; nfila++) {
     ids[nfila].innerHTML = productos[nfila].id;
     titles[nfila].innerHTML = productos[nfila].title;
     action[nfila].innerHTML = "<button class='eliminar'>Eliminar</button>";
+    action[nfila].firstChild.setAttribute(
+      "onclick",
+      "deleteProduct(" + productos[nfila].id + ");"
+    );
     descriptions[nfila].innerHTML = productos[nfila].description;
     categories[nfila].innerHTML = productos[nfila].category;
     catcode = codigoCat(productos[nfila].category);
@@ -71,15 +75,8 @@ function listarProductos(productos) {
       "window.open('" + productos[nfila].image + "');"
     );
   }
-  document.addEventListener("DOMContentLoaded", function () {
-    for (nfila = 0; nfila < num; nfila++) {
-      action[nfila].firstChild.setAttribute(
-        "onclick",
-        "deleteProduct(" + productos[nfila].id + ");"
-      );
-    }
-  });
 }
+
 async function obtenerProductos() {
   await fetch(url)
     .then((res) => res.json())
