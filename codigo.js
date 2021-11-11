@@ -47,18 +47,18 @@ function listarProductos(productos) {
   } else if (orden == 1) {
     ordenarAsc(productos, "price");
     precio.innerHTML = "Precio A";
-    precio.style.color = "darkgreen";
+    precio.style.color = "#5e81ac";
   } else if (orden == -1) {
     ordenarDesc(productos, "price");
     precio.innerHTML = "Precio D";
-    precio.style.color = "blue";
+    precio.style.color = "#bf616a";
   }
 
   listado.style.display = "block";
   for (nfila = 0; nfila < num; nfila++) {
     ids[nfila].innerHTML = productos[nfila].id;
     titles[nfila].innerHTML = productos[nfila].title;
-    action[nfila].innerHTML = "<button>Eliminar</button>";
+    action[nfila].innerHTML = "<button class='eliminar'>Eliminar</button>";
     descriptions[nfila].innerHTML = productos[nfila].description;
     categories[nfila].innerHTML = productos[nfila].category;
     catcode = codigoCat(productos[nfila].category);
@@ -136,7 +136,10 @@ async function addProduct() {
       },
     })
       .then((response) => response.json())
-      .then(() => obtenerProductos());
+      .then(() => {
+        obtenerProductos();
+        alert("Se agrego exitosamente el producto ");
+      });
   }
 }
 async function deleteProduct(id) {
@@ -152,7 +155,7 @@ async function deleteProduct(id) {
       alert("Se ha borrado exitosamente el producto ");
     })
     .catch((e) => {
-      console.log("Error");
-      console.log(e);
+      alert("Ups... ocurrio un error de tipo: " + e);
+      obtenerProductos();
     });
 }

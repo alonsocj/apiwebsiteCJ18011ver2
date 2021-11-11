@@ -1,13 +1,105 @@
-img {width:3cm;height:3cm;}
-table {width:80%;margin:auto;}
-th#price {cursor:pointer;}
-li {color:blue;}
+body {
+  background-color: #2e3440;
+  color: #d8dee9;
+}
+img {
+  width: 3cm;
+  height: 3cm;
+}
+table {
+  width: 80%;
+  margin: auto;
+}
+th#price {
+  cursor: pointer;
+}
+li {
+  color: #ebcb8b;
+}
 /*si chequea muestra los productos sin cheque desaparecen los productos*/
-input#c1:checked ~ table tbody tr.c1 { display: table-row; }
-input#c1:not(checked) ~ table tbody tr.c1 { display: none; }
-input#c2:checked ~ table tbody tr.c2 { display: table-row; }
-input#c2:not(checked) ~ table tbody tr.c2 { display: none; }
-input#c3:checked ~ table tbody tr.c3 { display: table-row; }
-input#c3:not(checked) ~ table tbody tr.c3 { display: none; }
-input#c4:checked ~ table tbody tr.c4 { display: table-row; }
-input#c4:not(checked) ~ table tbody tr.c4 { display: none; }
+input#c1:checked ~ table tbody tr.c1 {
+  display: table-row;
+}
+input#c1:not(checked) ~ table tbody tr.c1 {
+  display: none;
+}
+input#c2:checked ~ table tbody tr.c2 {
+  display: table-row;
+}
+input#c2:not(checked) ~ table tbody tr.c2 {
+  display: none;
+}
+input#c3:checked ~ table tbody tr.c3 {
+  display: table-row;
+}
+input#c3:not(checked) ~ table tbody tr.c3 {
+  display: none;
+}
+input#c4:checked ~ table tbody tr.c4 {
+  display: table-row;
+}
+input#c4:not(checked) ~ table tbody tr.c4 {
+  display: none;
+}
+.addprod {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.seccion1,
+.seccion2,
+.seccion3 {
+  display: flex;
+  flex-direction: column;
+}
+input,
+select,
+button {
+  margin: 1rem;
+}
+button {
+  background-color: #a3be8c; /* Green */
+  border: none;
+  color: #3b4252;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+.eliminar {
+  background-color: #bf616a;
+}
+table {
+  text-align: justify;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(76, 86, 106, 0.15);
+}
+table thead tr {
+  background-color: #a3be8c;
+  color: #3b4252;
+  text-align: center;
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+}
+table tbody tr {
+  border-bottom: 1px solid #eceff4;
+}
+table tbody tr:nth-of-type(even) {
+  background-color: #4c566a;
+}
+table tbody tr:nth-of-type(odd) {
+  background-color: #3b4252;
+}
+table tbody tr:last-of-type {
+  border-bottom: 2px solid #3b4252;
+}
+#filtroprods {
+  align-items: center;
+}

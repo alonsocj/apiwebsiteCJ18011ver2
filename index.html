@@ -12,25 +12,30 @@
     <p>… Sus datos personales aquí …</p>
     <div class="addProduct">
       <h2>Agrege un Producto</h2>
-      <form method="post" action="javascript:addProduct()">
-        <label>Foto del Producto</label>
-        <input type="text" name="foto" />
-        <label>Precio del Producto</label>
-        <input type="text" name="precio" />
-        <label>Titulo del Producto</label>
-        <input type="text" name="titulo" />
-        <label>Descripcion del Producto</label>
-        <input type="text" name="description" />
-        <select name="categorias" required>
-          <option value="null">--Seleccione una Categoria--</option>
-          <option value="caballeros">caballeros</option>
-          <option value="electronicos">electronicos</option>
-          <option value="joyeria">joyeria</option>
-          <option value="damas">damas</option>
-          <option value="ropa">ropa</option>
-        </select>
+      <form class="addprod" method="post" action="javascript:addProduct()">
+        <div class="seccion1">
+          <label>Foto del Producto</label>
+          <input type="text" name="foto" />
+          <label>Precio del Producto</label>
+          <input type="text" name="precio" />
+        </div>
+        <div class="seccion2">
+          <label>Titulo del Producto</label>
+          <input type="text" name="titulo" />
+          <label>Descripcion del Producto</label>
+          <input type="text" name="description" />
+        </div>
+        <div class="seccion3">
+          <select name="categorias" required>
+            <option value="null">--Seleccione una Categoria--</option>
+            <option value="caballeros">caballeros</option>
+            <option value="electronicos">electronicos</option>
+            <option value="joyeria">joyeria</option>
+            <option value="damas">damas</option>
+          </select>
 
-        <button type="submit">Agregar</button>
+          <button type="submit">Agregar</button>
+        </div>
       </form>
     </div>
     <p>
