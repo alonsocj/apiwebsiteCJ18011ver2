@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>Ejemplo web api</title>
+    <title>Ejemplo web API</title>
     <meta charset="utf-8" />
     <link rel="StyleSheet" href="estilo.css" type="text/css" media="screen" />
     <script src="codigo.js"></script>
   </head>
 
   <body>
-    <h1>… Ejemplo web api</h1>
-    <p>… Sus datos personales aquí …</p>
+    <h1>Ejemplo web API</h1>
+    <p><span>Nombre:</span> Luis Alonso Cornejo Jimenez</p>
+    <p><span>Carnet:</span> CJ18011</p>
+    <p><span>Grupo:</span> 05</p>
     <div class="addProduct">
       <h2>Agrege un Producto</h2>
       <form class="addprod" method="post" action="javascript:addProduct()">
@@ -18,6 +20,7 @@
           <input type="text" name="foto" />
           <label>Precio del Producto</label>
           <input type="text" name="precio" />
+          <span class="error"></span>
         </div>
         <div class="seccion2">
           <label>Titulo del Producto</label>

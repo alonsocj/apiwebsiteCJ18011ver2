@@ -58,11 +58,7 @@ function listarProductos(productos) {
   for (nfila = 0; nfila < num; nfila++) {
     ids[nfila].innerHTML = productos[nfila].id;
     titles[nfila].innerHTML = productos[nfila].title;
-    action[nfila].innerHTML = "<button class='eliminar'>Eliminar</button>";
-    action[nfila].firstChild.setAttribute(
-      "onclick",
-      "deleteProduct(" + productos[nfila].id + ");"
-    );
+
     descriptions[nfila].innerHTML = productos[nfila].description;
     categories[nfila].innerHTML = productos[nfila].category;
     catcode = codigoCat(productos[nfila].category);
@@ -74,11 +70,16 @@ function listarProductos(productos) {
       "onclick",
       "window.open('" + productos[nfila].image + "');"
     );
+    action[nfila].innerHTML = "<button class='eliminar'>Eliminar</button>";
+    action[nfila].firstChild.setAttribute(
+      "onclick",
+      "deleteProduct(" + productos[nfila].id + ");"
+    );
   }
 }
 
-async function obtenerProductos() {
-  await fetch(url)
+function obtenerProductos() {
+  fetch(url)
     .then((res) => res.json())
     .then((data) => {
       productos = data;
@@ -104,55 +105,62 @@ function ordenarAsc(p_array_json, p_key) {
     return 0;
   });
 }
-async function addProduct() {
+function addProduct() {
   var product = null;
+  regexPrice = /^\d+(.\d{1,2})?$/;
   let foto = document.getElementsByName("foto")[0].value;
   let precio = document.getElementsByName("precio")[0].value;
   let titulo = document.getElementsByName("titulo")[0].value;
   let description = document.getElementsByName("description")[0].value;
   let opcion = document.getElementsByName("categorias")[0];
   let seleccion = "";
+  let error = document.getElementsByClassName("error")[0];
   if (opcion.options[opcion.selectedIndex].value == "null") {
     alert("DEBE DE SELECCIONAR UNA CATEGORIA");
   } else {
-    seleccion = opcion.options[opcion.selectedIndex].text;
+    if (!regexPrice.test(precio)) {
+      error.style.display = "block";
+      error.innerHTML = `<p>El valor: ${precio} no es valido</p>`;
+    } else {
+      error.style.display = "none";
+      seleccion = opcion.options[opcion.selectedIndex].text;
 
-    product = {
-      image: foto,
-      price: precio,
-      title: titulo,
-      category: seleccion,
-      description: description,
-    };
-    await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: {
-        Accept: "application/json;",
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then(() => {
-        obtenerProductos();
-        alert("Se agrego exitosamente el producto ");
-      });
+      product = {
+        image: foto,
+        price: precio,
+        title: titulo,
+        category: seleccion,
+        description: description,
+      };
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(product),
+        headers: {
+          Accept: "application/json;",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          productos = data;
+          obtenerProductos();
+          alert("Se agrego exitosamente el producto ");
+        });
+    }
   }
 }
-async function deleteProduct(id) {
-  await fetch(url + "/" + id, {
+function deleteProduct(id) {
+  fetch(url + "/" + id, {
     method: "DELETE",
   })
-    .then((response) => {
-      console.log("works");
-      response.json;
-    })
-    .then(() => {
-      obtenerProductos();
-      alert("Se ha borrado exitosamente el producto ");
+    .then((response) => response.json)
+    .then((data) => {
+      productos = data;
     })
     .catch((e) => {
       alert("Ups... ocurrio un error de tipo: " + e);
-      obtenerProductos();
     });
+
+  alert("Se ha borrado exitosamente el producto ");
+  obtenerProductos();
 }
