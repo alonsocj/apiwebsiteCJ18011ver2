@@ -122,30 +122,34 @@ function addProduct() {
       error.style.display = "block";
       error.innerHTML = `<p>El valor: ${precio} no es valido</p>`;
     } else {
-      error.style.display = "none";
-      seleccion = opcion.options[opcion.selectedIndex].text;
+      if (foto == "" || titulo == "" || description == "") {
+        alert("No puede haber campos vacios");
+      } else {
+        error.style.display = "none";
+        seleccion = opcion.options[opcion.selectedIndex].text;
 
-      product = {
-        image: foto,
-        price: precio,
-        title: titulo,
-        category: seleccion,
-        description: description,
-      };
-      fetch(url, {
-        method: "POST",
-        body: JSON.stringify(product),
-        headers: {
-          Accept: "application/json;",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          productos = data;
-          obtenerProductos();
-          alert("Se agrego exitosamente el producto ");
-        });
+        product = {
+          image: foto,
+          price: precio,
+          title: titulo,
+          category: seleccion,
+          description: description,
+        };
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(product),
+          headers: {
+            Accept: "application/json;",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            productos = data;
+            obtenerProductos();
+            alert("Se agrego exitosamente el producto ");
+          });
+      }
     }
   }
 }
