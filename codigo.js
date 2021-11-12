@@ -1,4 +1,4 @@
-const url = "https://retoolapi.dev/WxKzb1/productos";
+const url = "https://retoolapi.dev/7mz0Tz/productos";
 var fila =
   "<tr><td class='id'></td><td class='foto'></td><td class='price'></td><td class='title'></td><td class='description'></td><td class='category'></td><td class='action'></td></tr>";
 var productos = null;
